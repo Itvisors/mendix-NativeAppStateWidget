@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="aiden.nativeappstatewidget.NativeAppStateWidget" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Native App State Widget</name>
+    <description>Native AppState widget</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="onBackgroundAction" type="action" required="false">
+                <caption>On background</caption>
+                <description>This action is triggered when the user navigates away from this app.</description>
+            </property>
+            <property key="onResumeAction" type="action" required="false">
+                <caption>On resume</caption>
+                <description>This action is triggered when the user navigates back to this app.</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
