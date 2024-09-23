@@ -1,43 +1,28 @@
 import { AppState, View } from "react-native";
-import { Component, createElement } from "react";
+import { createElement, useEffect } from "react";
 
-export class NativeAppStateWidget extends Component {
-    onAppStateChangeHandler = this.onAppStateChange.bind(this);
-    appState = AppState.currentState;
-    listenerReturn = null;
+export function NativeAppStateWidget(props) {
+    const { onBackgroundAction, onResumeAction } = props;
 
-    componentDidMount() {
-        this.listenerReturn = AppState.addEventListener("change", this.onAppStateChangeHandler);
-    }
-
-    render() {
-        return <View></View>;
-    }
-
-    onAppStateChange(nextAppState) {
-        if (this.appState === nextAppState) {
-            return;
-        }
-
-        const { onBackgroundAction, onResumeAction } = this.props;
-        if (nextAppState === "background" || nextAppState === "inactive") {
-            if (onBackgroundAction && onBackgroundAction.canExecute && !onBackgroundAction.isExecuting) {
-                onBackgroundAction.execute();
+    useEffect(() => {
+        const subscription = AppState.addEventListener("change", nextAppState => {
+            // console.info("Next appState: " + nextAppState);
+            if (nextAppState === "background" || nextAppState === "inactive") {
+                if (onBackgroundAction && onBackgroundAction.canExecute && !onBackgroundAction.isExecuting) {
+                    onBackgroundAction.execute();
+                }
             }
-        }
 
-        if (nextAppState === "active") {
-            if (onResumeAction && onResumeAction.canExecute && !onResumeAction.isExecuting) {
-                onResumeAction.execute();
+            if (nextAppState === "active") {
+                if (onResumeAction && onResumeAction.canExecute && !onResumeAction.isExecuting) {
+                    onResumeAction.execute();
+                }
             }
-        }
+        });
 
-        this.appState = nextAppState;
-    }
-
-    componentWillUnmount() {
-        if (this.listenerReturn) {
-            this.listenerReturn.remove();
-        }
-    }
+        return () => {
+            subscription.remove();
+        };
+    }, [onBackgroundAction, onResumeAction]);
+    return <View></View>;
 }

@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Native App State Widget</name>
     <description>Native AppState widget</description>
-    <icon/>
+    <studioProCategory>Device features</studioProCategory>
     <properties>
         <propertyGroup caption="General">
             <property key="onBackgroundAction" type="action" required="false">
