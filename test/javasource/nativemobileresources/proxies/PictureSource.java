@@ -6,26 +6,24 @@ package nativemobileresources.proxies;
 
 public enum PictureSource
 {
-	camera(new java.lang.String[][] { new java.lang.String[] { "en_US", "Camera" } }),
-	imageLibrary(new java.lang.String[][] { new java.lang.String[] { "en_US", "Image Library" } });
+	camera("8b0ce2cc-fcbb-4bc3-b286-6cf4cec095da"),
+	imageLibrary("18ec5335-0158-4387-b9f6-72e92069fb13");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private PictureSource(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private PictureSource(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }
