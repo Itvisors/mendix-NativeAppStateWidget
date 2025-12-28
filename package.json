@@ -1,7 +1,7 @@
 {
   "name": "nativeappstatewidget",
   "widgetName": "NativeAppStateWidget",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Native AppState widget",
   "copyright": "2023 Aiden",
   "author": "Marcel Groeneweg",
@@ -22,7 +22,7 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^10.21.2"
+    "@mendix/pluggable-widgets-tools": "^11.3.0"
   },
   "dependencies": {},
   "resolutions": {
